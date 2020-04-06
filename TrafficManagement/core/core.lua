@@ -1,5 +1,12 @@
+TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+
 RegisterCommand("traffic", function() 
-    WarMenu.OpenMenu('menu:main')
+	local xPlayer = ESX.GetPlayerData()
+	if xPlayer.job.name == 'police' then
+		WarMenu.OpenMenu('menu:main')
+	else
+		TriggerEvent("chat:addMessage",{color={255,0,0},multiline=false,args={"Traffic","You don't have permission to control traffic!"}})
+	end
 end)
 
 function ShowNotification( text )
