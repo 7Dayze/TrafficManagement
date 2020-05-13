@@ -1,3 +1,4 @@
+TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 Citizen.CreateThread(function()
     local player = GetPlayerPed(-1)
     local currentItemIndex = 1
@@ -19,7 +20,10 @@ Citizen.CreateThread(function()
 
             WarMenu.Display()
         elseif IsDisabledControlJustPressed(1, KEYBIND) then -- *OPTIONAL* You can change 'KEYBIND' with an ID from here: https://docs.fivem.net/docs/game-references/controls/
-            WarMenu.OpenMenu('menu:main')
+        	local xPlayer = ESX.GetPlayerData()
+		if xPlayer.job.name == 'police' then
+			WarMenu.OpenMenu('menu:main')
+		end
         end
          
         Citizen.Wait(0)
